@@ -13,11 +13,23 @@ article {
 }
 
 article .content {
+    clear: both;
     text-align: left;
     background-image: -webkit-linear-gradient(top, transparent, transparent 31px, #ccc 0);
-    line-height: 32px;
-    -webkit-background-size: 100% 32px;
+    background-repeat: repeat-y;
     background-size: 100% 32px;
+    line-height: 32px;
+    width: 100%;
+}
+
+article .content:before {
+    display: block;
+    position: relative;
+    content: url("left_quotation_mark.svg");
+    float: left;
+    margin: 0;
+    padding: 0;
+    left: -32px;
 }
 
 footer a {
