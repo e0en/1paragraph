@@ -3,7 +3,21 @@
 from flask import (Flask, render_template, redirect, url_for, request,
                    session)
 from functools import wraps
+import os
+import psycopg2
+import urlparse
 
+
+urlparse.uses_netloc.append("postgres")
+db_url = urlparse.urlparse(os.environ["DATABASE_URL"])
+print db_url
+db_conn = psycopg2.connect(
+    database=db_url.path[1:],
+    user=db_url.username,
+    password=db_url.password,
+    host=db_url.hostname,
+    port=db_url.port
+)
 
 app = Flask(__name__)
 app.secret_key = "secret_key"
