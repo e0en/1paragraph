@@ -1,6 +1,16 @@
+@import url(http://notosanskr-hestia.s3-website-ap-northeast-1.amazonaws.com/stylesheets/NotoSansKR-Hestia.css);
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
 body {
     margin: 0;
     text-align: center;
+    /* font-family: 'Noto Sans Korean', sans-serif; */
+    font-family: 'Nanum Gothic', sans-serif;
+    font-weight: 100;
+}
+
+h1, h2 {
+    font-weight: 300;
 }
 
 article {
@@ -29,7 +39,23 @@ article .content:before {
     float: left;
     margin: 0;
     padding: 0;
-    left: -32px;
+    left: -50px;
+    top: -10px;
+    width: 0;
+    height: 0;
+}
+
+article .content:after {
+    display: block;
+    position: relative;
+    content: url("right_quotation_mark.svg");
+    float: right;
+    margin: 0;
+    padding: 0;
+    right: -10px;
+    top: -10px;
+    width: 0;
+    height: 0;
 }
 
 footer a {
