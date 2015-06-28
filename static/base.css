@@ -9,6 +9,10 @@ body {
     font-weight: 100;
 }
 
+.container {
+    width: 100%;
+}
+
 h1, h2 {
     font-weight: 300;
 }
@@ -60,4 +64,10 @@ article .content:after {
 
 footer a {
     color: #eee;
+}
+
+@media screen and (min-device-width: 320px) {
+    article {
+        width: 100%;
+    }
 }
