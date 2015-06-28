@@ -3,6 +3,7 @@
 
 body {
     margin: 0;
+    padding: 0;
     text-align: center;
     /* font-family: 'Noto Sans Korean', sans-serif; */
     font-family: 'Nanum Gothic', sans-serif;
@@ -13,53 +14,37 @@ body {
     width: 100%;
 }
 
+*:read-write:focus {
+    outline: none;
+}
+
 h1, h2 {
     font-weight: 300;
+}
+
+h1 {
+    margin: 0.5em 0 1.5em 0;
+    padding: 0;
+    font-size: 250%;
 }
 
 article {
     box-sizing: border-box;
     margin: 0 auto;
-    padding: 1em 1em;
     width: 640px;
     max-width: 100%;
     height: 100%;
 }
 
 article .content {
-    clear: both;
+    box-sizing: border-box;
     text-align: left;
     background-image: -webkit-linear-gradient(top, transparent, transparent 31px, #ccc 0);
     background-repeat: repeat-y;
     background-size: 100% 32px;
     line-height: 32px;
-    width: 100%;
-}
-
-article .content:before {
-    display: block;
-    position: relative;
-    content: url("left_quotation_mark.svg");
-    float: left;
-    margin: 0;
-    padding: 0;
-    left: -50px;
-    top: -10px;
-    width: 0;
-    height: 0;
-}
-
-article .content:after {
-    display: block;
-    position: relative;
-    content: url("right_quotation_mark.svg");
-    float: right;
-    margin: 0;
-    padding: 0;
-    right: -10px;
-    top: -10px;
-    width: 0;
-    height: 0;
+    width: calc(100% - 80px);
+    margin: 0 40px;
 }
 
 footer a {
@@ -70,9 +55,10 @@ footer a {
     @viewport {
         width: 320px;
         zoom: 1.0;
+        min-zoom: 1.0;
+        max-zoom: 1.0;
     }
     article {
-        padding: 0.5em;
         max-width: 100%;
         width: 100%;
     }
