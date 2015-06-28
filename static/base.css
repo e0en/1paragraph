@@ -66,8 +66,13 @@ footer a {
     color: #eee;
 }
 
-@media screen and (min-device-width: 320px) {
+@media screen and (max-device-width: 480px) {
+    @viewport {
+        width: 320px;
+    }
     article {
+        padding: 0.5em;
+        max-width: 100%;
         width: 100%;
     }
 }
