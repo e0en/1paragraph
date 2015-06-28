@@ -38,6 +38,7 @@ def login():
         return render_template("login.html", title="Login: 1Paragraph")
     else:
         session["email"] = request.form["email"]
+        session["user_id"] = 0
         return redirect(request.args.get("next"))
 
 
@@ -48,11 +49,28 @@ def logout():
     return redirect(url_for("index"))
 
 
+@app.route("/get_diary/<string:date>")
+@login_required
+def get_diary(date):
+    cursor = db_conn.cursor()
+    cursor.execute("SELECT * FROM diarys WHERE day='%s' and user_id=%d" %
+                   (date, session['user_id']))
+    return date
+
+
 @app.route("/")
 @login_required
 def index():
     return render_template("main.html", title="1Paragraph")
 
+
+@app.route("/init")
+def init():
+    cursor = db_conn.cursor()
+    cursor.execute(open("schema.sql", "r").read())
+    db_conn.commit()
+    cursor.close()
+    return redirect(url_for("index"))
 
 if __name__ == "__main__":
     app.run(debug=True)
