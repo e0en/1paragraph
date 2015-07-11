@@ -2,6 +2,7 @@ cffi==1.1.2
 cryptography==0.9.1
 enum34==1.0.4
 Flask==0.10.1
+Flask-SQLAlchemy==2.0
 gunicorn==19.3.0
 idna==2.0
 ipaddress==1.0.7
@@ -14,4 +15,5 @@ pyasn1==0.1.8
 pycparser==2.14
 pyOpenSSL==0.15.1
 six==1.9.0
+SQLAlchemy==1.0.6
 Werkzeug==0.10.4

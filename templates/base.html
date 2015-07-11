@@ -10,6 +10,8 @@
 
     <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='base.css') }}">
+
+    <script>var STATIC_URL = "{{ url_for('static', filename='') }}"</script>
     {% block header %}
     {% endblock %}
 
