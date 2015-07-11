@@ -120,11 +120,12 @@ def get_diary(date):
         try:
             new_post = Post(request.form["content"], author_id, date_obj)
             db.session.add(new_post)
+            db.session.commit()
         except:
+            db.session.rollback()
             db.session.query(Post)\
                 .filter_by(author_id=author_id, date=date_obj)\
                 .update({"content": request.form["content"]})
-        finally:
             db.session.commit()
 
         return "OK"
