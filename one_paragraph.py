@@ -119,8 +119,7 @@ def get_diary(date):
     else:
         try:
             new_post = Post(request.form["content"], author_id, date_obj)
-            print new_post
-            db.session.save(new_post)
+            db.session.add(new_post)
         except:
             db.session.query(Post)\
                 .filter_by(author_id=author_id, date=date_obj)\
