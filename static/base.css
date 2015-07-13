@@ -47,6 +47,10 @@ article .content {
     margin: 0 40px;
 }
 
+nav {
+    width: 100%;
+}
+
 footer a {
     color: #eee;
 }

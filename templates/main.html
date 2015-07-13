@@ -15,5 +15,14 @@
 {% endblock %}
 
 {% block footer %}
-<a href="/logout">logout</a>
+
+<nav>
+{% if post.prev_date %}
+<a href="{{ url_for("get_diary", date=post.prev_date) }}">Prev</a>
+{% endif %}
+{% if post.next_date %}
+<a href="{{ url_for("get_diary", date=post.next_date) }}">Next</a>
+{% endif %}
+</nav>
+<p> <a href="/logout">logout</a> </p>
 {% endblock %}

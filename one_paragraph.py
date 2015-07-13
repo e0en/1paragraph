@@ -105,14 +105,26 @@ def get_diary(date):
     date_obj = datetime.date(date_seq[0], date_seq[1], date_seq[2])
     author_id = int(session["user_id"])
     if request.method == "GET":
-        print session["user_id"]
-        print date_obj
         post = Post.query.filter_by(author_id=author_id,
                                     date=date_obj).first()
         if post:
             post_map = {'content': post.content, 'date': date}
         else:
             post_map = {'content': '', 'date': date}
+
+        prev_date = Post.query\
+            .filter("author_id=%d AND date < '%s'" % (author_id, date))\
+            .order_by(Post.date.desc())\
+            .first()
+        if prev_date is not None:
+            post_map['prev_date'] = prev_date.date.strftime("%Y-%m-%d")
+
+        next_date = Post.query\
+            .filter("author_id=%d AND date > '%s'" % (author_id, date))\
+            .order_by(Post.date)\
+            .first()
+        if next_date is not None:
+            post_map['next_date'] = next_date.date.strftime("%Y-%m-%d")
 
         return render_template("main.html", title="%s: 1Paragraph" % date,
                                post=post_map)
