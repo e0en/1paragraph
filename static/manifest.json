@@ -1,5 +1,5 @@
 {
     "name": "1paragraph",
     "display": "standalone",
-    "start_url": "/",
+    "start_url": "/"
 }
