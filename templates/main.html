@@ -10,7 +10,7 @@
 
 <h1><date>{{ post.date }}</date></h1>
 
-<p class="content" contenteditable="true">{{ post.content }}</p>
+<p class="content" contenteditable="true" tabindex="1">{{ post.content }}</p>
 
 {% endblock %}
 
@@ -18,10 +18,10 @@
 
 <nav>
 {% if post.prev_date %}
-<a href="{{ url_for("get_diary", date=post.prev_date) }}">Prev</a>
+<a class="prev" href="{{ url_for("get_diary", date=post.prev_date) }}">Prev</a>
 {% endif %}
 {% if post.next_date %}
-<a href="{{ url_for("get_diary", date=post.next_date) }}">Next</a>
+<a class="next" href="{{ url_for("get_diary", date=post.next_date) }}">Next</a>
 {% endif %}
 </nav>
 <p> <a href="/logout">logout</a> </p>

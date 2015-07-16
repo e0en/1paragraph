@@ -15,6 +15,8 @@ $("body").ready(function() {
         $(this).after(rq);
     });
 
+    $("p.content").focus();
+
     $("p.content").keyup(function() {
         date = $(this).parent().children("h1").text();
         $.ajax({
