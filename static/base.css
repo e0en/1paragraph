@@ -73,6 +73,10 @@ nav a.next {
     float: right;
 }
 
+footer p {
+    clear: both;
+}
+
 form {
     padding: 1em 0;
 }
