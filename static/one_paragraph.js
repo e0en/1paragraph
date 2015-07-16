@@ -17,6 +17,16 @@ $("body").ready(function() {
 
     $("p.content").focus();
 
+    $("h1").focusout(function() {
+        date = $(this).text();
+        window.location.replace("/diary/" + date);
+    });
+
+    $("h1").keypress(function(e) {
+        if (e.which == 13)
+            event.preventDefault();
+    });
+
     $("p.content").keyup(function() {
         date = $(this).parent().children("h1").text();
         $.ajax({
@@ -24,5 +34,9 @@ $("body").ready(function() {
             url: window.location.pathname,
             data: { content: $(this).text(), date: date }
         });
+    });
+    $("p.content").keypress(function(e) {
+        if (e.which == 13)
+            event.preventDefault();
     });
 });
