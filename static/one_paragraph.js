@@ -23,8 +23,11 @@ $("body").ready(function() {
     });
 
     $("h1").keypress(function(e) {
-        if (e.which == 13)
+        if (e.which == 13) {
             event.preventDefault();
+            date = $(this).text();
+            window.location.replace("/diary/" + date);
+       }
     });
 
     $("p.content").keyup(function() {
@@ -36,7 +39,14 @@ $("body").ready(function() {
         });
     });
     $("p.content").keypress(function(e) {
-        if (e.which == 13)
+        if (e.which == 13) {
             event.preventDefault();
+            date = $(this).parent().children("h1").text();
+            $.ajax({
+                method: "POST",
+                url: window.location.pathname,
+                data: { content: $(this).text(), date: date }
+            });
+        }
     });
 });

@@ -139,6 +139,13 @@ def get_diary(date):
                 .filter_by(author_id=author_id, date=date_obj)\
                 .update({"content": request.form["content"]})
             db.session.commit()
+        finally:
+            print len(request.form["content"].strip())
+            if len(request.form["content"].strip()) == 0:
+                db.session.query(Post)\
+                    .filter_by(author_id=author_id, date=date_obj)\
+                    .delete()
+                db.session.commit()
 
         return "OK"
 
