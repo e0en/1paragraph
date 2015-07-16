@@ -78,11 +78,20 @@ form {
 }
 
 form input {
-    font-size: 24px;
-    height: 24px;
     display: inline-block;
-    margin: 0.5em 0;
-    width: 100%;
+    box-sizing: border-box;
+    width: calc(100% - 1em);
+    height: 40px;
+    margin: 0.5em;
+    padding: 0.2em;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    font-size: 24px;
+}
+
+form input[type=submit] {
+    background: #ccc;
+    color: black;
 }
 
 @media screen and (max-width: 480pt) {
