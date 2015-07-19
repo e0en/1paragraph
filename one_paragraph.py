@@ -57,6 +57,12 @@ class Post(db.Model):
         return '<Post %r>' % self.date
 
 
+@app.before_request
+def make_session_permanent():
+    session.permanent = True
+    app.permanent_session_lifetime = datetime.timedelta(days=7)
+
+
 def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
