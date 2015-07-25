@@ -1,13 +1,14 @@
 $("body").ready(function() {
+    var qSize = 24;
     $(".content").each(function() {
         var lq = $('<img src="' + STATIC_URL + 'left_quotation_mark.svg" />');
-        lq.width(32);
-        lq.height(32);
+        lq.width(qSize);
+        lq.height(qSize);
         lq.css("position", "relative");
         lq.css("float", "left");
         var rq = $('<img src="' + STATIC_URL + 'right_quotation_mark.svg" />');
-        rq.width(32);
-        rq.height(32);
+        rq.width(qSize);
+        rq.height(qSize);
         rq.css("position", "relative");
         rq.css("float", "right");
         rq.css("top", "-32px");
