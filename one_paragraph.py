@@ -7,11 +7,11 @@ from functools import wraps
 
 import datetime
 import os
-import urlparse
-import md5
+import urllib
+import hashlib
 
 
-urlparse.uses_netloc.append("postgres")
+urllib.parse.uses_netloc.append("postgres")
 
 app = Flask(__name__)
 app.secret_key = "secret_key"
@@ -26,10 +26,10 @@ class Author(db.Model):
 
     def __init__(self, email, password):
         self.email = email
-        self.password = md5.md5(password).hexdigest()
+        self.password = hashlib.md5(password.encode("utf-8")).hexdigest()
 
     def check_password(self, password):
-        return self.password == md5.md5(password).hexdigest()
+        return self.password == hashlib.md5(password.encode("utf-8")).hexdigest()
 
     def __repr__(self):
         return '<User %r>' % self.email
@@ -132,8 +132,14 @@ def get_diary(date):
         if next_date is not None:
             post_map['next_date'] = next_date.date.strftime("%Y-%m-%d")
 
+        all_date_list = Post.query\
+            .filter("author_id=%d AND date <> '%s'" % (author_id, date))\
+            .order_by(Post.date.desc())\
+            .all()
+        all_dates = map(lambda x: x.date.strftime("%Y-%m-%d"), all_date_list)
+
         return render_template("main.html", title="%s: 1Paragraph" % date,
-                               post=post_map)
+                               post=post_map, all_dates=all_dates)
     else:
         try:
             new_post = Post(request.form["content"], author_id, date_obj)
@@ -146,7 +152,7 @@ def get_diary(date):
                 .update({"content": request.form["content"]})
             db.session.commit()
         finally:
-            print len(request.form["content"].strip())
+            print(len(request.form["content"].strip()))
             if len(request.form["content"].strip()) == 0:
                 db.session.query(Post)\
                     .filter_by(author_id=author_id, date=date_obj)\

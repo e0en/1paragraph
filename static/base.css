@@ -108,6 +108,13 @@ form input[type=submit] {
     color: black;
 }
 
+.all_dates {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    clear: both;
+}
+
 @media screen and (max-width: 480pt) {
     @viewport {
         width: 320px;

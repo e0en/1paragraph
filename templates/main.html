@@ -24,5 +24,13 @@
 <a class="next" href="{{ url_for("get_diary", date=post.next_date) }}">Next</a>
 {% endif %}
 </nav>
+
+{% if all_dates %}
+<ol class="all_dates">
+    {% for d in all_dates %}
+    <li><a href="{{ url_for("get_diary", date=d) }}">{{ d }}</a></li>
+    {% endfor %}
+</ol>
+{% endif %}
 <p> <a href="/logout">logout</a> </p>
 {% endblock %}
