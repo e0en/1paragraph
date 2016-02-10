@@ -27,6 +27,7 @@
 
 {% if all_dates %}
 <ol class="all_dates">
+    <li><a href="{{ url_for("get_diary", date=today) }}">Today</a></li>
     {% for d in all_dates %}
     <li><a href="{{ url_for("get_diary", date=d) }}">{{ d }}</a></li>
     {% endfor %}

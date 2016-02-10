@@ -19,6 +19,10 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.environ["DATABASE_URL"]
 db = SQLAlchemy(app)
 
 
+def todaystr():
+    return datetime.date.today().strftime('%Y-%m-%d')
+
+
 class Author(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(80), unique=True)
@@ -29,7 +33,8 @@ class Author(db.Model):
         self.password = hashlib.md5(password.encode("utf-8")).hexdigest()
 
     def check_password(self, password):
-        return self.password == hashlib.md5(password.encode("utf-8")).hexdigest()
+        md5 = hashlib.md5(password.encode("utf-8")).hexdigest()
+        return self.password == md5
 
     def __repr__(self):
         return '<User %r>' % self.email
@@ -132,14 +137,18 @@ def get_diary(date):
         if next_date is not None:
             post_map['next_date'] = next_date.date.strftime("%Y-%m-%d")
 
+        today = todaystr()
+
         all_date_list = Post.query\
             .filter("author_id=%d AND date <> '%s'" % (author_id, date))\
             .order_by(Post.date.desc())\
             .all()
         all_dates = map(lambda x: x.date.strftime("%Y-%m-%d"), all_date_list)
+        all_dates = [x for x in all_dates if x != today]
 
         return render_template("main.html", title="%s: 1Paragraph" % date,
-                               post=post_map, all_dates=all_dates)
+                               post=post_map, all_dates=all_dates,
+                               today=today)
     else:
         try:
             new_post = Post(request.form["content"], author_id, date_obj)
@@ -165,7 +174,7 @@ def get_diary(date):
 @app.route("/")
 @login_required
 def index():
-    datestr = datetime.date.today().strftime('%Y-%m-%d')
+    datestr = todaystr()
     return redirect(url_for("get_diary", date=datestr))
 
 
