@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 from flask import (Flask, render_template, redirect, url_for, request,
                    session)
-from flask.ext.sqlalchemy import SQLAlchemy
+from flask_sqlalchemy import SQLAlchemy
 from functools import wraps
 
 import datetime
